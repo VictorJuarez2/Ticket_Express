@@ -1,7 +1,19 @@
 {
-  "dependencies": {
-    "firebase": "^9.13.0",
-    "webpack": "^5.75.0",
+  "name": "introtofirebase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "firebase": "^9.8.2"
   }
 }
