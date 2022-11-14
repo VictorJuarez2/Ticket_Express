@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Express</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <!--header-->
+    <header class="p-3" style="background-color: black;">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <b style="color: rgb(135, 128, 94); outline: white; font-size: larger;">Ticket Express</b>
+                <img src="..\Images\T_logo.png" alt="" width="75px">
+            </a>
+    
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="index.html" class="nav-link px-2 text-white">Home</a></li>
+            </ul>
+
+          </div>
+        </div>
+    </header>
+    <!--end of header-->
+
+ 
+    <!-- Begin Container -->
+    <div class="container">
+    
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h1 id="heading">bookevent event</h1>
+            </div>
+        </div>
+    
+        <!-- Row Begins -->
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <!-- Form Begin -->
+                <form class="go-right col-md-8 col-sm-12 col-xs-12" role="form" action= " " method="post" id="contact_form" data-toggle="validator">
+                    <!-- FULL NAME -->
+                    <div class="form-group">
+                        <input name="full_name" id="full_name"  class="form-control" type="text" required>
+                        <label for="full_name">event name</label>
+                    </div>
+                    <!-- FIRST NAME -->
+                    <div class="form-group">
+                        <input name="first_name" id="first_name"  class="form-control" type="text" required>
+                        <label for="first_name">location</label>
+                    </div>
+                    <!-- LAST NAME -->
+                    <div class="form-group">
+                        <input name="last_name" id="last_name"  class="form-control" type="text" required>
+                        <label for="last_name">Capacity</label>
+                    </div>
+                    <!-- YOUR EMAIL -->
+                    <div class="form-group">
+                        <input name="price" id="email"  class="form-control" type="email" required>
+                        <label for="email">ticket price</label>
+                    </div>
+                    <!-- PHONE NUMBER -->
+                    <div class="form-group">
+                        <input name="phone" id="phone" maxlength="10"  class="form-control" type="tel" required>
+                        <label for="phone">event page</label>
+                    </div>
+                    <!-- NONPROFIT NAME -->
+                    <div class="form-group">
+                        <input name="nonprofit_name" id="nonprofit_name"  class="form-control" type="text" required>
+                        <label for="nonprofit_name">direct contact</label>
+                    </div>
+                    <!-- WEBSITE -->
+                    <div class="form-group">
+                        <input name="website" id="website"  class="form-control" type="text" required>
+                        <label for="website">direct contact phone number</label>
+                    </div>
+                    <!-- TWITTER NAME -->
+                    <div class="form-group">
+                        <input name="twitter_name" class="form-control" type="text"  id="twitter-name-text" required>
+                        <label for="twitter-name-text">direct contact email</label>
+                    </div>
+                    <!--img-->
+                    <div class="form-group">
+                        <input name="twitter_name" class="form-control" type="text"  id="twitter-name-text" required>
+                        <label for="twitter-name-text">img</label>
+                    </div>
+                </form>
+                <!-- Form End -->
+    
+            </div>
+    
+         
+        </div>
+        <!-- Row Ends -->
+    
+        <!-- Success message -->
+        <div class="row col-md-offset-1 col-md-9">
+            <div class="alert alert-success" role="alert" id="success_message">
+                <i class="glyphicon glyphicon-thumbs-up"></i>
+                Thank You! Your information has been successfully submitted.
+            </div>
+        </div>
+    
+        <!-- Button -->
+        <div class="row col-md-11 col-sm-12 col-xs-12">
+            <button type="submit" form="contact_form" class="btn btn-primary btn-block submit circle" id="submitButton">
+                <span>SEND</span>
+            </button>
+        </div>
+    
+    </div>
+    <!-- End Container -->
+    
+    </body>
+</html>
