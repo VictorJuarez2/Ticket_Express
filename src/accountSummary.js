@@ -18,13 +18,14 @@ const change_booking = document.querySelector(".Change")
 let flightCards = document.getElementById('flightCards');
 let PrevflightCards = document.getElementById('PrevflightCards');
 var uid;
+/*
 var today = new Date();
 let yyyy = today.getFullYear();
 let dd = String(today.getDate()).padStart(2, '0');
 let mm = String(today.getMonth() + 1).padStart(2, '0');
 today = yyyy + '-' + mm + '-' + dd;
 const dob = document.getElementById("DOB")
-dob.max = today;
+dob.max = today;*/
 
 const d = new Date();
 
@@ -45,8 +46,8 @@ onAuthStateChanged(auth, (user) => {
             update_Profile_Form.addEventListener('submit', (event) => {
                 event.preventDefault();
                 let ref = doc(db, 'Account', uid);
-                if (update_Profile_Form.userName.value) { updateDoc(ref, { userName: update_Profile_Form.Name.value }); }
-                if (update_Profile_Form.Balance.value) { updateDoc(ref, { Balance: update_Profile_Form.Balance.value }) }
+                if (update_Profile_Form.Name.value) { updateDoc(ref, { Name: update_Profile_Form.Name.value }); }
+                if (update_Profile_Form.Balance.value) { updateDoc(ref, { Balance: parseFloat(update_Profile_Form.Balance.value) }) }
                 /*
                 if (update_Profile_Form.Phone_Number.value) { updateDoc(ref, { Phone_Number: update_Profile_Form.Phone_Number.value }) }
                 if (update_Profile_Form.Image.value) { updateDoc(ref, { image: update_Profile_Form.Image.value }) }*/
@@ -65,14 +66,14 @@ onAuthStateChanged(auth, (user) => {
 function create_page_logged_in(userID) {
     getDoc(doc(db, 'Account', userID)).then((snapshot) => {
 
-        tab.innerHTML = "Agile Airlines - " + snapshot.data().userName + "'s Profile"
+        tab.innerHTML = "Ticket Express - " + snapshot.data().userName + "'s Profile"
         body.innerHTML = `<div class="row justify-content-center" >
     <div class="col-xl-6 col-lg-7 col-md-12">
       <div class="card profile-header">
         <div class="body">
           <div class="row">
             <div class="col-lg-8 col-md-8 col-12">
-              <h4 class="m-t-0 m-b-0"><strong>${snapshot.data().userName}</strong></h4>
+              <h4 class="m-t-0 m-b-0"><strong>${snapshot.data().Name}</strong></h4>
               <h6> Balance: ${snapshot.data().Balance}</h6>
               <div>
                 <button type = "submit" value = "submit" class="btn btn-primary btn-round edit_profile">Edit Profile</button>
@@ -102,20 +103,20 @@ async function create_Ticket_Table(userId) {
                 snapshot.docs.forEach((ticket) => {
                     (async () => {
                         let dest = main.data().Tickets_Purchased
-                        let eventDoc = doc(db, "Event", ticket.data()['eventID'])
+                        let eventDoc = doc(db, "event", ticket.data().eventID)
                         let event = await getDoc(eventDoc)
                         if (dest.includes(ticket.id) && event.exists()) {
-                            let departure = flight.data()['eventDate']
+                            let departure = event.data()['eventDate']
                             let strDate = new Date(departure)
                             if (strDate < d) {
                                 let card = `<div class="card">` +
                                     `<div class="card-body">` +
-                                    `<img src="assets/Agile_Airlines_Logo_Attempt1.png" alt="" width="20" height="20" class="d-inline-block align-text-top"> Agile Airlines - AAR${flight.data()['Airplane Id']}` +
+                                    `Ticket Express - ${ticket.data()['ticketType']}` +
                                     `<div class="card-group">` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
-                                    `<b>Departure</b><br><br>` +
+                                    `<b>Event Name / Date</b><br><br>` +
                                     `${event.data()['eventName']}<br>` +
                                     `${event.data()['eventDate']}` +
                                     `</p>` +
@@ -124,7 +125,7 @@ async function create_Ticket_Table(userId) {
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
-                                    `<b>Arrival</b><br><br>` +
+                                    `<b>Event Location / Time</b><br><br>` +
                                     `${event.data()['eventLocation']}<br>` +
                                     `${event.data()['eventTime']}` +
                                     `</p>` +
@@ -133,21 +134,21 @@ async function create_Ticket_Table(userId) {
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
-                                    `<b>From</b><br><br>` +
+                                    `<b>Artist</b><br><br>` +
                                     `${event.data().eventArtist}` +
                                     `</p>` +
                                     `</div>` +
                                     `</div>` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
-                                    `<b>To</b><br><br>` +
-                                    `${event.data().Location}` +
+                                    `<b>Date Purchased</b><br><br>` +
+                                    `${ticket.data()['DateCreated']}` +
                                     `</div>` +
                                     `</div>` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<b>Price</b><br><br>` +
-                                    `$${event.data()['Description']}` +
+                                    `$${ticket.data()['cost']}` +
                                     `</div>` +
                                     `</div>` +
                                     `</div>` +
@@ -158,12 +159,12 @@ async function create_Ticket_Table(userId) {
                             } else {
                                 let card = `<div class="card">` +
                                     `<div class="card-body">` +
-                                    `<img src="assets/Agile_Airlines_Logo_Attempt1.png" alt="" width="20" height="20" class="d-inline-block align-text-top"> Agile Airlines - AAR${flight.data()['Airplane Id']}` +
+                                    `Ticket Express - ${ticket.data()['ticketType']} Admission`  +
                                     `<div class="card-group">` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
-                                    `<b>Departure</b><br><br>` +
+                                    `<b>Event Name / Date</b><br><br>` +
                                     `${event.data()['eventName']}<br>` +
                                     `${event.data()['eventDate']}` +
                                     `</p>` +
@@ -172,7 +173,7 @@ async function create_Ticket_Table(userId) {
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
-                                    `<b>Arrival</b><br><br>` +
+                                    `<b>Event Location / Time</b><br><br>` +
                                     `${event.data()['eventLocation']}<br>` +
                                     `${event.data()['eventTime']}` +
                                     `</p>` +
@@ -181,21 +182,21 @@ async function create_Ticket_Table(userId) {
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
-                                    `<b>From</b><br><br>` +
+                                    `<b>Artist</b><br><br>` +
                                     `${event.data().eventArtist}` +
                                     `</p>` +
                                     `</div>` +
                                     `</div>` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
-                                    `<b>To</b><br><br>` +
-                                    `${event.data().Location}` +
+                                    `<b>Date Purchased</b><br><br>` +
+                                    `${ticket.data()['DateCreated']}` +
                                     `</div>` +
                                     `</div>` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
                                     `<b>Price</b><br><br>` +
-                                    `$${event.data()['Description']}` +
+                                    `$${ticket.data()['cost']}` +
                                     `</div>` +
                                     `</div>` +
                                     `<div class="card bg-white" style="border:none;">` +
@@ -263,22 +264,12 @@ flightCards.addEventListener('submit', remove_ticket)
 function remove_ticket(event) {
     event.preventDefault()
     getDoc(doc(db, 'Ticket', event.submitter.value)).then((ticket_snapshot) => {
-        if (ticket_snapshot.data().type == 'Economy') {
-            issue_Voucher(ticket_snapshot)
-            getDoc(doc(db, 'event', ticket_snapshot.data().flight_id)).then((event_snapshot) => {
-                let curr_seats = event_snapshot.data()['Economy Capacity']
-                curr_seats = curr_seats + 1
-                updateDoc(doc(db, 'Airline Flights', ticket_snapshot.data().flight_id), { ['Economy Capacity']: curr_seats })
-            })
-        }
-        else {
-            issue_Refund(ticket_snapshot)
-            getDoc(doc(db, 'Ticket', ticket_snapshot.data().flight_id)).then((event_snapshot) => {
-                let curr_seats = event_snapshot.data()['First Class Capacity']
-                curr_seats = curr_seats + 1
-                updateDoc(doc(db, 'Event', ticket_snapshot.data().flight_id), { ['First Class Capacity']: curr_seats })
-            })
-        }
+        issue_Refund(ticket_snapshot)
+        getDoc(doc(db, 'event', ticket_snapshot.data()['eventID'])).then((event_snapshot) => {
+            let curr_seats = int(event_snapshot.data()['maxCapacity'])
+            curr_seats = parseInt(curr_seats) + 1
+            updateDoc(doc(db, 'event', ticket_snapshot.data()['eventID']), { ['maxCapacity']: parseInt(curr_seats) })
+        })
         create_Ticket_Table(uid)
         deleteDoc(doc(db, 'Ticket', event.submitter.value))
 
@@ -298,8 +289,8 @@ function remove_ticket(event) {
 
 function issue_Refund(ticket) {
     getDoc(doc(db, 'Account', uid)).then((snapshot) => {
-        let past_refunds = snapshot.data().Balance
-        let newBalance = past_refunds + ticket.cost
+        let past_Balance = snapshot.data().Balance
+        let newBalance = parseFloat(past_Balance) + parseFloat(ticket.cost)
         updateDoc(doc(db, 'Account', uid), { Balance: newBalance })
     })
 }

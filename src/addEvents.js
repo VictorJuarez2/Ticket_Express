@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-const eventRef = collection(db, 'Ticket');
+const eventRef = collection(db, 'event');
 
 // Appending Airline Flights Cities to drop down inputs
 getDocs(eventRef)
@@ -74,7 +74,7 @@ arrive_id.onchange = function () {
     input.max = this.value;
 }
 
-// Add a Flight
+// Add a Event
 const addFlightForm = document.querySelector(".inputBoxes");
 
 addFlightForm.addEventListener('submit', (event) => {
@@ -100,33 +100,6 @@ addFlightForm.addEventListener('submit', (event) => {
     })
         .then(() => {
             addFlightForm.reset();
-            depart_id.max = "";
-            arrive_id.min = today;
-            alert("Flight successfully added!");
-        })
-});
-
-// Add a City 
-const addCityForm = document.querySelector(".addCity");
-addCityForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    addDoc(citiesRef, {
-        CityName: addCityForm.city_name.value,
-        Code: addCityForm.code.value,
-        Country: addCityForm.country.value,
-        Description: document.getElementById("description").value,
-        Image: addCityForm.image.value,
-        Latitude: addCityForm.latitude.value,
-        Longitude: addCityForm.longitude.value,
-        Population: addCityForm.population.value
-    })
-        .then(() => {
-            addCityForm.reset();
-            alert("City successfully added!");
-            location.reload();
-            depart_id.max = "";
-            depart_id.min = today;
-            arrive_id.min = today;
-            arrive_id.max = "";
+            alert("Event successfully added!");
         })
 });
