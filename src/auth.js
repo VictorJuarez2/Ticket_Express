@@ -54,6 +54,7 @@ signUpForm.addEventListener('submit', (event) => {
             setDoc(doc(db, "Account", user.uid), { // We then set the default user credentials into our Airline Users collection
                 Email: user.email,
                 Name: "",
+                Balance: 500.00,
                 Tickets_Purchased: []
             })
         })

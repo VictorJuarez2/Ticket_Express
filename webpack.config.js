@@ -5,7 +5,8 @@ module.exports = {
     entry: {
         Home: './src/home.js',
         auth: './src/auth.js',
-        firebaseConfig: './src/firebaseConfig.js'
+        firebaseConfig: './src/firebaseConfig.js',
+        accountSummary: './src/accountSummary.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist/bundle'),
