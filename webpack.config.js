@@ -7,7 +7,8 @@ module.exports = {
         auth: './src/auth.js',
         firebaseConfig: './src/firebaseConfig.js',
         view_events: './src/view_events.js',
-        bookEvent: './src/bookEvent.js'
+        bookEvent: './src/bookEvent.js',
+        accountSummary: './src/accountSummary.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist/bundle'),
