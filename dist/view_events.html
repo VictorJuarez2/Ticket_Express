@@ -198,8 +198,8 @@
       </div>
     </div>
 
-    <!--Script for table sorting-->
-    <!-- <script>
+    
+    <script>
       function click_on_row_button(num, ticketNumber){
         console.log('ticketNum'+ticketNumber);
         var tickets = document.getElementById('ticketNum'+ticketNumber).value;
@@ -207,17 +207,24 @@
         localStorage.setItem('id', JSON.stringify(num));
         localStorage.setItem('tickets', JSON.stringify(tickets));
         console.log(tickets);
-        window.location.href = 'booking.html';
+        window.location.href = 'bookEvent.html';
       }
-    </script> -->
+    </script>
 
      <!--Footer-->
-    <footer class="bg-dark text-center text-white" style="position: sticky">
-      <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgb(33, 36, 41);">
-        © 2020 Copyright:
-        <a class="text-white" href="index.html">TicketExpress.com</a>
+     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© 2022 TicketExpress, Inc</span>
       </div>
+  <!-- This is just a random comment -->
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul>
     </footer>
       
     <!--Scripts, 1) Our code 2) Bootstrap -->
