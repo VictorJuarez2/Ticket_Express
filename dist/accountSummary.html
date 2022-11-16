@@ -12,28 +12,35 @@
 
 <body>
     <!--Navbar from Bootstrap-->
-    <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="index.html">
-                <img src="assets/Agile_Airlines_Logo_Attempt1.png" alt="" width="30" height="30"
-                    class="d-inline-block align-text-top">
-                Agile Airlines
-            </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-              <li><a href="view_events.html" class="nav-link px-2 text-white">View Events</a></li>
-              <li><a href="bookEvent.html" class="nav-link px-2 text-white">Book Event</a></li>
-              <li><a href="accountSummary.html" class="nav-link px-2 text-white">Account Summary</a></li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-light my-2 my-sm-0 logged-in" type="button" id="logout">Sign Out</button>
-            </form>
+    <header class="p-3" style="background-color: black;">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <b style="color: rgb(135, 128, 94); outline: white; font-size: larger;">Ticket Express</b>
+                    <img src="..\Images\T_logo.png" alt="" width="75px">
+                </a>
+    
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="view_events.html" class="nav-link px-2 text-white logged-in">View Events</a></li>
+                    <!--<li><a href="bookEvent.html" class="nav-link px-2 text-white ">Book Event</a></li>-->
+                    <li><a href="accountSummary.html" class="nav-link px-2 text-white logged-in">Account Summary</a></li>
+                    <li><a href="view_event_admin.html" class="nav-link px-2 text-white logged-in">Events Created</a></li>
+                </ul>
+    
+                <div class="text-end">
+                    <form class="form-inline my-2 my-lg-0">
+                        <button type="button" class="btn btn-outline-light my-2 logged-out" data-toggle="modal"
+                            data-target="#modalSignin">Login</button>
+                        <button type="button" class="btn btn-warning my-2 logged-out" data-toggle="modal"
+                            data-target="#modalSignUp">Sign-up</button>
+                        <button class="btn btn-light my-2 my-sm-0 logged-in" type="button" id="logout"
+                            style="display: none;">SignOut</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <h3 style="text-align: center;"><u><b>Account Summary</b></u></h3>
 

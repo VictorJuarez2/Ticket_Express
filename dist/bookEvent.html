@@ -14,33 +14,35 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 </head>
 <body>
-    <header class="p-3" style="background-color: black;" id="top">
-        <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <b style="color: rgb(135, 128, 94); outline: white; font-size: larger;">Ticket Express</b>
-                <img src="..\Images\T_logo.png" alt="" width="75px">
-            </a>
+    <header class="p-3" style="background-color: black;">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <b style="color: rgb(135, 128, 94); outline: white; font-size: larger;">Ticket Express</b>
+            <img src="..\Images\T_logo.png" alt="" width="75px">
+          </a>
     
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-              <li><a href="view_events.html" class="nav-link px-2 text-white">View Events</a></li>
-              <li><a href="bookEvent.html" class="nav-link px-2 text-white">Book Event</a></li>
-              <li><a href="accountSummary.html" class="nav-link px-2 text-white">Account Summary</a></li>
-            </ul>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="view_events.html" class="nav-link px-2 text-white logged-in">View Events</a></li>
+            <!--<li><a href="bookEvent.html" class="nav-link px-2 text-white ">Book Event</a></li>-->
+            <li><a href="accountSummary.html" class="nav-link px-2 text-white logged-in">Account Summary</a></li>
+            <li><a href="view_event_admin.html" class="nav-link px-2 text-white logged-in">Events Created</a></li>
+          </ul>
     
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-              <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          <div class="text-end">
+            <form class="form-inline my-2 my-lg-0">
+              <button type="button" class="btn btn-outline-light my-2 logged-out" data-toggle="modal"
+                data-target="#modalSignin">Login</button>
+              <button type="button" class="btn btn-warning my-2 logged-out" data-toggle="modal"
+                data-target="#modalSignUp">Sign-up</button>
+              <button class="btn btn-light my-2 my-sm-0 logged-in" type="button" id="logout"
+                style="display: none;">SignOut</button>
             </form>
-    
-            <div class="text-end">
-              <button type="button" class="btn btn-outline-light me-2" data-toggle="modal" data-target="#modalSignin">Login</button>
-              <button type="button" class="btn btn-warning"data-toggle="modal" data-target="#modalSignUp" >Sign-up</button>
-              <button class="btn btn-light my-2 my-sm-0 logged-in" type="button" id="logout" style="display: none;">SignOut</button>
-            </div>
           </div>
         </div>
-      </header>
+      </div>
+    </header>
 
 
         <!-- Sign In Modual -->
