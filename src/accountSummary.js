@@ -217,49 +217,7 @@ async function create_Ticket_Table(userId) {
     })();
 }
 
-//Update Profile
-/*
-change_booking.addEventListener('submit', change_ticket)
-function change_ticket(event) {
-    event.preventDefault();
-    getDoc(doc(db, 'Airline Tickets', event.submitter.value)).then((ticket_snapshot) => {
-        if (ticket_snapshot.data().type == 'Economy') {
-            getDoc(doc(db, 'Airline Flights', ticket_snapshot.data().flight_id)).then((flight_snapshot) => {
-                let curr_seats = flight_snapshot.data()['Economy Capacity']
-                curr_seats = curr_seats + 1
-                updateDoc(doc(db, 'Airline Flights', ticket_snapshot.data().flight_id), { ['Economy Capacity']: curr_seats })
-            })
-        }
-        else {
-            getDoc(doc(db, 'Airline Flights', ticket_snapshot.data().flight_id)).then((flight_snapshot) => {
-                let curr_seats = flight_snapshot.data()['First Class Capacity']
-                curr_seats = curr_seats + 1
-                updateDoc(doc(db, 'Airline Flights', ticket_snapshot.data().flight_id), { ['First Class Capacity']: curr_seats })
-            })
-        }
-        deleteDoc(doc(db, 'Airline Tickets', event.submitter.value))
-        getDoc(doc(db, 'Airline Users', uid)).then((user_snapshot) => {
-            var user_tickets = user_snapshot.data().Tickets_Purchased
-            var points = user_snapshot.data().Reward_Points
-            for (var i = 0; i < user_tickets.length; i++) {
-                if (user_tickets[i] == event.submitter.value) {
-                    user_tickets.splice(i, 1)
-                }
-            }
-            let curr_balance = Number(user_snapshot.data().Balance)
-            curr_balance = curr_balance + Number(ticket_snapshot.data().price)
-            points = points - ticket_snapshot.data().Reward_Points
-            updateDoc(doc(db, 'Airline Users', uid),
-                {
-                    Balance: curr_balance,
-                    Tickets_Purchased: user_tickets,
-                    Reward_Points: points
-                })
-            setTimeout(() => window.location.href = "flights.html", 2500)
-        })
-    })
-}
-*/
+//Remove and Refund
 flightCards.addEventListener('submit', remove_ticket)
 function remove_ticket(event) {
     event.preventDefault()

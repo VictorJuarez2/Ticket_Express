@@ -20,6 +20,21 @@ const loggedIn = document.querySelectorAll('.logged-in'); // Grabbing logged in 
 // Altering the navbar based on if a user is passed through.
 const navBarUI = (user) => {
     if (user) {
+        user.getIdTokenResult()
+            .then((idTokenResult) => {
+                // Confirm the user is an Admin.
+                console.log(idTokenResult.claims.admin == true)
+                if (idTokenResult.claims.role == "manager" || idTokenResult.claims.role == "admin") {
+                    // Show admin UI.
+                    admin.forEach(item => item.style.display = 'block');
+                    changeManagerMessage(user.uid);
+                    showNoUserNames();
+                } else if (idTokenResult.claims.role == "user") {
+                    // Show regular user UI.
+                    admin.forEach(item => item.style.display = 'None');
+                    rewardButton.style.display = 'block'
+                }
+            })
         loggedIn.forEach(item => item.style.display = 'block'); // Here if the user is logged in we will hide the loggedin portions
         loggedOut.forEach(item => item.style.display = 'none'); // Here if the user is logged in we will display the logged in divs
     } else {
