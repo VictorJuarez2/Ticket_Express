@@ -37,7 +37,7 @@
       </header>
 
   <!--No Flights Available-->
-  <div id="addFlightError">
+  <div id="addEventError">
   </div>
 
   <!--Search For Flights Header Sectionn-->
@@ -53,7 +53,7 @@
   <!--Search For A Flight Section-->
   <section>
     <div class="wrapper bg-white">
-      <form action="#" id="findFlight">
+      <form action="#" id="findEvent">
           <div class="form-group border-bottom d-flex align-items-center justify-content-between flex-wrap">
               <div class="d-flex align-items-center my-sm-0 my-2">
                   <a href="#" class="text-decoration-none">
@@ -64,18 +64,20 @@
           <div class="form-group d-sm-flex margin">
               <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative">
                   <label for="artist"></label>
-                  <select id="artistList" class="form-control form-select" name="artist" required>
-                    <option value="" disabled selected hidden>Artist</option>
-                  </select>
+                    <select id="artistList" class="form-control form-select" name="artist" required>
+                      <option value="" disabled selected hidden>Artist</option>
+                    </select>
                   <div class="label" id="artist"></div>
                   <span class="fas fa-dot-circle text-muted"></span>
               </div>
           </div>
           <div class="form-group d-sm-flex margin">
               <div class="d-flex align-items-center flex-fill me-sm1 my-sm-0 border-bottom position-relative">
-                  <label for="date"></label>
-                  <input id = "dateInput" type="date" placeholder="Event Date" class="form-control" name="date" required>
-                  <div class="label" id="date"></div>
+                  <label for="location"></label>
+                  <select id = "locationList" class="form-control" name="location">
+                    <option value="" disabled selected hidden>Location</option>
+                  </select>
+                  <div class="label" id="location"></div>
               </div>
             <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative dropdown">
               <label for="price"></label>
@@ -102,14 +104,14 @@
       <div class="modal-content ">
           <!-- <input type="hidden" name="email_e" value="admin@filmscafe.in"> -->
           <div class="modal-header">
-            <h2 class="modal-title" style="text-align: center;"><i>Take a look at all of our flights</i></h2>
+            <h2 class="modal-title" style="text-align: center;"><i>Take a look at all of our events</i></h2>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           
           <div class="modal-body get_quote_view_modal_body">
-                <div class="row justify-content-center" id="addFlight">
+                <div class="row justify-content-center" id="addEvent">
               
               </div>
           </div>
