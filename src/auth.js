@@ -14,14 +14,30 @@ const auth = getAuth(app);
 // Selecting fields from html to alter what is seen.
 const loggedOut = document.querySelectorAll('.logged-out'); // Grabbing logged out fields which can be seen when a user is logged out
 const loggedIn = document.querySelectorAll('.logged-in'); // Grabbing logged in fields which uses can only see when logged in
+const admin = document.querySelectorAll('.admin')
 
 /************************************ Check user state once logged *************************************************************/
 
 // Altering the navbar based on if a user is passed through.
 const navBarUI = (user) => {
     if (user) {
-        loggedIn.forEach(item => item.style.display = 'block'); // Here if the user is logged in we will hide the loggedin portions
-        loggedOut.forEach(item => item.style.display = 'none'); // Here if the user is logged in we will display the logged in divs
+        user.getIdTokenResult()
+            .then((idTokenResult) => {
+                // Confirm the user is an Admin.
+                console.log(idTokenResult.claims.admin == true)
+                if (dTokenResult.claims.role == true) {
+                    // Show admin UI.
+                    admin.forEach(item => item.style.display = 'block');
+                    changeManagerMessage(user.uid);
+                    showNoUserNames();
+                } else{
+                    // Show regular user UI.
+                    admin.forEach(item => item.style.display = 'None');
+                    rewardButton.style.display = 'block'
+                    loggedIn.forEach(item => item.style.display = 'block'); // Here if the user is logged in we will hide the loggedin portions
+                    loggedOut.forEach(item => item.style.display = 'none'); // Here if the user is logged in we will display the logged in divs
+                }
+            })
     } else {
         loggedIn.forEach(item => item.style.display = 'none'); // Here we check if the user is not logged in and will hide login divs
         loggedOut.forEach(item => item.style.display = 'block'); // Here we check if the user is not logged in and will show logged out divs
