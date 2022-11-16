@@ -100,16 +100,16 @@ async function showUserNames(id){
 
   if((Number.isInteger(parseInt(ticket)) || ticket == "") && parseInt(ticket) <= 5){
     userCards.innerHTML = "";
-    const userDoc = doc(db, 'Airline Users', id);
+    const userDoc = doc(db, 'Account', id);
     const docSnap = await getDoc(userDoc);
 
     if(ticket != ""){
-      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, docSnap.data().Phone_Number, docSnap.data());
+      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, 123, docSnap.data());
       for(let i = 0; i < parseInt(ticket)-1; i++){
         userCards.innerHTML += getCardNotUser(i+1);
       }
     }else{
-      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, docSnap.data().Phone_Number, docSnap.data());
+      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, 123, docSnap.data());
     }
 
   }else{ //Gives error if no integer number is inputed
@@ -199,7 +199,7 @@ function getCardUser(fullName, email, phoneNum){
           `<p class="mb-0 text-primary">Phone</p>`+
         `</div>`+
         `<div class="col-sm-9">`+
-          `<p class="text-black mb-0">${phoneNum}</p>`+
+          `<p class="text-black mb-0">PhoneNum</p>`+
         `</div>`+
       `</div>`+
     `</div>`+
@@ -236,7 +236,7 @@ async function getCartInfo(flightClass){
   <li class="list-group-item d-flex justify-content-between lh-condensed">
     <div>
       <h6 class="my-0">${docSnap.data()['eventName']}</h6>
-      <small class="text-muted"><b>Artist: </b>${docSnap.data().eventArtist}</small><br>
+      <small class="text-muted"><b>Artist: </b>${docSnap.data().artistName}</small><br>
       <small class="text-muted"><b>Location: </b>${docSnap.data().eventLocation}</small><br>
       <small class="text-muted"><b>Time: </b>${docSnap.data().eventTime}</small><br>
       <small class="text-muted"><b>Capacity: </b>${docSnap.data()['maxCapacity']}</small><br>
@@ -285,38 +285,32 @@ purchaseButton.addEventListener('submit', (event)=>{
 *  Output: Depending on the state, if user or non user is not able to buy a ticket a FAIL message is displayed, else a SUCESS message is displayed
 */
 async function buyTicketUser(id){
-  const userDoc = doc(db, 'Airline Users', id);
+  const userDoc = doc(db, 'Account', id);
   const docSnapUser = await getDoc(userDoc);
 
-  const flightDoc = doc(db, 'Airline Flights', id_int);
-  const docSnapFlight = await getDoc(flightDoc);
+  const eventDoc = doc(db, 'event', id_int); //events
+  const docSnapEvent = await getDoc(eventDoc);
   
   if(docSnapUser.data().Balance > currPrice){
     //Create new ticket document
     (async() => {
-      const docRef = await addDoc(collection(db, "Airline Tickets"), {
-        flight_id: id_int,
-        passenger_id: id,
-        price: currPrice,
-        distance: docSnapFlight.data().Distance,
-        type: flightType,
-        time: Timestamp.now(),
-        Reward_Points: Math.floor((docSnapFlight.data().Distance/20) + (currPrice/5))
+      const docRef = await addDoc(collection(db, "Ticket"), { //Ticket
+        ticketType: "gen",
+        eventID: id_int,
+        cost: currPrice,
+        DateCreated: Timestamp.now()
       });
-      updateDoc(docSnapUser.ref, {Tickets_Purchased: arrayUnion(docRef.id), Balance: docSnapUser.data().Balance - currPrice*ticket, 
-                Reward_Points: docSnapUser.data().Reward_Points + (Math.floor((docSnapFlight.data().Distance/20) + (currPrice*ticket/5)))}); //Update user document
-      if(flightType == 'Economy'){
-        updateDoc(docSnapFlight.ref, {['Economy Capacity']: docSnapFlight.data()['Economy Capacity'] - 1});  
-      }else{
-        updateDoc(docSnapFlight.ref, {['First Class Capacity']: docSnapFlight.data()['First Class Capacity'] - 1});  
-      }                                  
+
+      updateDoc(docSnapUser.ref, {Tickets_Purchased: arrayUnion(docRef.id), Balance: docSnapUser.data().Balance - currPrice*ticket}); //Update user document
+      updateDoc(docSnapEvent.ref, {['maxCapacity']: docSnapEvent.data()['maxCapacity'] - 1});
+                                        
       })();
       displaySuccess();
       purchaseButton.reset();
       var top = document.getElementById("top");
       top.scrollIntoView();
       let timer = setTimeout(function () {
-        window.location.href = 'flights.html'
+        window.location.href = 'view_events.html'
       }, 5000);
   }else{
     displayFundingError()
@@ -332,8 +326,8 @@ async function buyTicketUser(id){
 *  Output: Depending on the state, if user or non user is not able to buy a ticket a FAIL message is displayed, else a SUCESS message is displayed
 */
 async function buyTicketNonUser(email, isMainUser){
-  const flightDoc = doc(db, 'Airline Flights', id_int);
-  const docSnapFlight = await getDoc(flightDoc);
+  const userDoc = doc(db, 'event', id_int);
+  const docSnapEvent = await getDoc(userDoc);
 
   var mainUserFound = false;
 
@@ -346,28 +340,20 @@ async function buyTicketNonUser(email, isMainUser){
     }else if(user.data().Email.toLowerCase() == email.toLowerCase()){
       console.log("Non main user");
       (async() => {
-        const docRef = await addDoc(collection(db, "Airline Tickets"), {
-          flight_id: id_int,
-          passenger_id: user.id,
-          price: 0,
-          distance: docSnapFlight.data().Distance,
-          type: flightType,
-          time: Timestamp.now(),
-          Reward_Points: Math.floor((docSnapFlight.data().Distance/25) + (currPrice/10))
+        const docRef = await addDoc(collection(db, "Ticket"), {
+            ticketType: "gen",
+            eventID: id_int,
+            cost: currPrice,
+            DateCreated: Timestamp.now()
         });
-        updateDoc(user.ref, {Tickets_Purchased: arrayUnion(docRef.id), Reward_Points: user.data().Reward_Points + (Math.floor((docSnapFlight.data().Distance/25) + (currPrice/10)))}); //Update user document
-        if(flightType == 'Economy'){
-          updateDoc(docSnapFlight.ref, {['Economy Capacity']: docSnapFlight.data()['Economy Capacity'] - 1});  
-        }else{
-          updateDoc(docSnapFlight.ref, {['First Class Capacity']: docSnapFlight.data()['First Class Capacity'] - 1});  
-        }
+        updateDoc(user.ref, {Tickets_Purchased: arrayUnion(docRef.id)}); //Update user document
+        updateDoc(docSnapEvent.ref, {['maxCapacity']: docSnapEvent.data()['maxCapacity'] - 1});  
         })();
     }
     });
   });
 
   if(!mainUserFound){
-    console.log("hey");
     displaySuccess();
     purchaseButton.reset();
     var top = document.getElementById("top");
