@@ -47,54 +47,9 @@
   <div class = "topButton admin" style="text-align: right; align-items: center; color: white; display: none;">
     Add new flights as a manager:<br><button id="addButton" type="button" onclick="location.href='addFlight.html';" class="btn btn-primary my-2 my-sm-0">Add A Flight</button>
   </div>
-    <h1 class="text-black align-items-center" style="text-align: center;">Search For Events</h1>
+    <h1 class="text-black align-items-center" style="text-align: center;">Events You Created</h1>
   </section>
 
-  <!--Search For A Flight Section-->
-  <section>
-    <div class="wrapper bg-white">
-      <form action="#" id="findEvent">
-          <div class="form-group border-bottom d-flex align-items-center justify-content-between flex-wrap">
-              <div class="d-flex align-items-center my-sm-0 my-2">
-                  <a href="#" class="text-decoration-none">
-                     <b>Filter</b><span class="fas fa-angle-right ps-2 text-primary"></span>
-                  </a>
-              </div>
-          </div>
-          <div class="form-group d-sm-flex margin">
-              <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                  <label for="artist"></label>
-                    <select id="artistList" class="form-control form-select" name="artist">
-                      <option value="" disabled selected hidden>Artist</option>
-                    </select>
-                  <div class="label" id="artist"></div>
-                  <span class="fas fa-dot-circle text-muted"></span>
-              </div>
-          </div>
-          <div class="form-group d-sm-flex margin">
-              <div class="d-flex align-items-center flex-fill me-sm1 my-sm-0 border-bottom position-relative">
-                  <label for="location"></label>
-                  <select id = "locationList" class="form-control" name="location">
-                    <option value="" disabled selected hidden>Location</option>
-                  </select>
-                  <div class="label" id="location"></div>
-              </div>
-            <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative dropdown">
-              <label for="price"></label>
-              <input class="form-control" list="datalistOptions" id="price" placeholder="Price Range" name="price">
-              <datalist id="datalistOptions">
-                <option value="$0-$99 (Low)">
-                <option value="$100-$249 (Medium)">
-                <option value=">$250 (High)">
-              </datalist>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary my-2 my-sm-0 btn-lg btn-block">Search Events</button>&nbsp;
-          <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-white my-2 my-sm-0 btn-lg right" id="modal_view_right" data-toggle="modal" data-target="#information_modal">List Of All Events ></button>
-        </div>
-      </form>
-  </section>
 
 <!--VIEW FLIGHTS RIGHT SIDE MODAL-->
 <div class="modal modal_outer right_modal fade" id="information_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" >
@@ -122,9 +77,6 @@
 
   <!--Flight That Match Section-->
   <section class="container">
-    <h1 class="text-white align-items-center" style="text-align: center;">Flights That Match Will Appear Below</h1>
-    <p class="lead fw-normal mb-5 text-white" style="text-align: center;">Look for a perfect place to travel and book a flight.</p>
-
         <div class="container" style="display: none;" id="buttons">
           <div class="row">
               <div class="col-md-12 text-right">
@@ -135,7 +87,7 @@
           </div>
         </div>
           &nbsp;
-          <div class="row" id='eventCards'> <!--This is where all the flights are appended by id="flightCards"-->
+          <div class="row" id="eventCards"> <!--This is where all the flights are appended by id="flightCards"-->
           </div>
   </section>
 
@@ -239,7 +191,7 @@
   integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="bundle/home.bundle.js"></script>
 <script src="bundle/auth.bundle.js"></script>
-<script src="bundle/view_events.bundle.js"></script>
+<script src="bundle/view_event_admin.bundle.js"></script>
     
 
 </body>
