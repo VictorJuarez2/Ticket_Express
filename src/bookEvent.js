@@ -310,7 +310,7 @@ async function buyTicketUser(id){
       var top = document.getElementById("top");
       top.scrollIntoView();
       let timer = setTimeout(function () {
-        window.location.href = 'view_events.html'
+        window.location.href = 'viewEvents.html'
       }, 5000);
   }else{
     displayFundingError()
