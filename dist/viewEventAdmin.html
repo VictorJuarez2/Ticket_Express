@@ -17,7 +17,7 @@
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
               <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-              <li><a href="view_events.html" class="nav-link px-2 text-white">View Events</a></li>
+              <li><a href="viewEvents.html" class="nav-link px-2 text-white">View Events</a></li>
               <li><a href="bookEvent.html" class="nav-link px-2 text-white">Book Event</a></li>
               <li><a href="accountSummary.html" class="nav-link px-2 text-white">Account Summary</a></li>
             </ul>
@@ -74,19 +74,9 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-  <!--Flight That Match Section-->
+  <!--Events That Match Section-->
   <section class="container">
-        <div class="container" style="display: none;" id="buttons">
-          <div class="row">
-              <div class="col-md-12 text-right">
-                <button type="button" class="btn btn-primary my-2 my-sm-0" id="lowToHigh">Low-to-High</button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-primary my-2 my-sm-0" id="highToLow">High-to-Low</button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-light my-2 my-sm-0" id="reset">Reset</button>
-              </div>
-          </div>
-        </div>
-          &nbsp;
-          <div class="row" id="eventCards"> <!--This is where all the flights are appended by id="flightCards"-->
+          <div class="row" id="eventCards"> <!--This is where all the events are appended by id="eventCards"-->
           </div>
   </section>
 
@@ -159,7 +149,7 @@
         localStorage.setItem('id', JSON.stringify(num));
         localStorage.setItem('tickets', JSON.stringify(tickets));
         console.log(tickets);
-        window.location.href = 'bookEvent.html';
+        window.location.href = 'editEvent.html';
       }
     </script>
 
@@ -190,7 +180,7 @@
   integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="bundle/home.bundle.js"></script>
 <script src="bundle/auth.bundle.js"></script>
-<script src="bundle/view_event_admin.bundle.js"></script>
+<script src="bundle/viewEventAdmin.bundle.js"></script>
     
 
 </body>

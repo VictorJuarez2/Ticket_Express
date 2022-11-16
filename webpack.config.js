@@ -6,10 +6,10 @@ module.exports = {
         Home: './src/home.js',
         auth: './src/auth.js',
         firebaseConfig: './src/firebaseConfig.js',
-        view_events: './src/view_events.js',
+        viewEvents: './src/viewEvents.js',
         bookEvent: './src/bookEvent.js',
         accountSummary: './src/accountSummary.js',
-        view_event_admin: './src/view_event_admin.js'
+        viewEventAdmin: './src/viewEventAdmin.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist/bundle'),
