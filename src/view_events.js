@@ -45,12 +45,12 @@ findEvent.addEventListener('submit', event=>{
                     (eventData.eventLocation.toLowerCase().trim().includes(eventLocation.toLowerCase().trim()) || eventLocation == "")){
                         let card = `<div class="card">`+
                                 `<div class="card-body">`+
-                                    `${eventData['eventName']}`+
+                                    `<h3><b>${eventData['eventName']}</b></h3>`+
                                     `<div class="card-group">`+
                                         `<div class="card bg-white" style="border:none;">`+
                                             `<div class="card-body text-center">`+
                                                 `<p class="card-text">`+
-                                                    `<b>Description</b><br><br>`+
+                                                    `<b>Description</b><br>`+
                                                         `${eventData['eventDescription']}<br>`+
                                                 `</p>`+
                                             `</div>`+
@@ -58,7 +58,8 @@ findEvent.addEventListener('submit', event=>{
                                         `<div class="card bg-white" style="border:none;">`+
                                             `<div class="card-body text-center">`+
                                                 `<p class="card-text">`+
-                                                    `<b>Time</b><br><br>`+
+                                                    `<b>Time</b><br>`+
+                                                    `${eventData["eventTime"]}<br>`+
                                                     `${eventData['eventDate']}<br>`+
                                                     `${eventData['eventLocation']}`+
                                                 `</p>`+
@@ -116,7 +117,7 @@ getDocs(eventsRef)
         })
     });
 
-//artist drop down
+//location drop down
 getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
@@ -137,7 +138,8 @@ const addEventInfo = document.getElementById('addEvent');
 viewEvent.addEventListener('click', (event)=>{
     getDocs(eventsRef)
     .then((events)=>{
-      events.docs.forEach((event) => {
+        addEventInfo.innerHTML = ''
+        events.docs.forEach((event) => {
         const eventData = event.data()
         let card = `<div class="card center" style="width: 25rem; border:none;">
         <div class="card-header">
