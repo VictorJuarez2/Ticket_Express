@@ -6,38 +6,35 @@ import { getFirestore, collection, doc, addDoc, updateDoc, arrayUnion } from 'fi
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+const db = getFirestore();
+const eventsRef = collection(db, 'event');
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         //User is signed in 
         const userID = user.uid;
-        // Initialize Function
-        const db = getFirestore();
 
         // Create Collections Reference from Firestore
-        const usersRef = doc(db, 'Account', userID);
+        const addFlightForm = document.querySelector(".inputBoxes");
 
-        const postRef = collection(db, 'event');
-
-        //Add a document
-        const addPostsForm = document.querySelector(".add");
-        addPostsForm.addEventListener("submit", (event) => {
+        addFlightForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            (async () => {
-                const docRef = await addDoc(postRef, {
-                    title: addPostsForm.title.value,
-                    image: addPostsForm.image.value,
-                    text: addPostsForm.text.value,
-                    postedBy: userID,
-                    liked: []
+            addDoc(eventsRef, {
+                ['artistName']: addFlightForm.eventArtist.value,
+                ['creatorID']: userID, //Do this 
+                ['eventDate']: addFlightForm.eventDate.value,
+                ['eventDescription']: addFlightForm.eventDesc.value,
+                ['eventLocation']: addFlightForm.eventLocation.value,
+                ['eventName']: addFlightForm.eventName.value,
+                ['evenTime']: addFlightForm.eventTime.value,
+                ['maxCapacity']: addFlightForm.eventCapacity.value,
+                ['price']: addFlightForm.eventCost.value
+            })
+                .then(() => {
+                    addFlightForm.reset();
+                    alert("Event successfully added!");
                 })
-                updateDoc(usersRef, {
-                    Posts: arrayUnion(docRef.id)
-                })
-                    .then(() => {
-                        addPostsForm.reset();
-                    })
-            })();
-        })
+        });
     } else {
         //User is signed out
     }
