@@ -47,7 +47,7 @@ onAuthStateChanged(auth, (user) => {
                 event.preventDefault();
                 let ref = doc(db, 'Account', uid);
                 if (update_Profile_Form.Name.value) { updateDoc(ref, { Name: update_Profile_Form.Name.value }); }
-                if (update_Profile_Form.Balance.value) { updateDoc(ref, { Balance: parseFloat(update_Profile_Form.Balance.value) }) }
+                if (update_Profile_Form.Balance.value) { updateDoc(ref, { Balance: parseInt(update_Profile_Form.Balance.value) }) }
                 /*
                 if (update_Profile_Form.Phone_Number.value) { updateDoc(ref, { Phone_Number: update_Profile_Form.Phone_Number.value }) }
                 if (update_Profile_Form.Image.value) { updateDoc(ref, { image: update_Profile_Form.Image.value }) }*/
@@ -222,12 +222,12 @@ flightCards.addEventListener('submit', remove_ticket)
 function remove_ticket(event) {
     event.preventDefault()
     getDoc(doc(db, 'Ticket', event.submitter.value)).then((ticket_snapshot) => {
-        issue_Refund(ticket_snapshot)
         getDoc(doc(db, 'event', ticket_snapshot.data()['eventID'])).then((event_snapshot) => {
-            let curr_seats = int(event_snapshot.data()['maxCapacity'])
+            let curr_seats = parseInt(event_snapshot.data()['maxCapacity'])
             curr_seats = parseInt(curr_seats) + 1
             updateDoc(doc(db, 'event', ticket_snapshot.data()['eventID']), { ['maxCapacity']: parseInt(curr_seats) })
         })
+        issue_Refund(ticket_snapshot)
         create_Ticket_Table(uid)
         deleteDoc(doc(db, 'Ticket', event.submitter.value))
 
@@ -239,6 +239,7 @@ function remove_ticket(event) {
                 }
             }
             updateDoc(doc(db, 'Account', uid), { Tickets_Purchased: user_tickets })
+            create_page_logged_in(uid)
         })
         flightCards.innerHTML = ''
         PrevflightCards.innerHTML = ''
@@ -246,10 +247,13 @@ function remove_ticket(event) {
 }
 
 function issue_Refund(ticket) {
-    getDoc(doc(db, 'Account', uid)).then((snapshot) => {
-        let past_Balance = snapshot.data().Balance
-        let newBalance = parseFloat(past_Balance) + parseFloat(ticket.cost)
-        updateDoc(doc(db, 'Account', uid), { Balance: newBalance })
-    })
+    (async () =>{
+        getDoc(doc(db, 'Account', uid)).then((snapshot) => {
+            let past_Balance = snapshot.data().Balance
+            let newBalance = parseInt(past_Balance) + parseInt(ticket.data()['cost'])
+            console.log(newBalance)
+            updateDoc(doc(db, 'Account', uid), { Balance: newBalance })
+        })
+    })();
 }
 
