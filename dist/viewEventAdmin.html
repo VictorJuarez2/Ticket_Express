@@ -142,14 +142,10 @@
 
     
     <script>
-      function click_on_row_button(num, ticketNumber){
-        console.log('ticketNum'+ticketNumber);
-        var tickets = document.getElementById('ticketNum'+ticketNumber).value;
+      function click_on_row_button(num){
 
         localStorage.setItem('id', JSON.stringify(num));
-        localStorage.setItem('tickets', JSON.stringify(tickets));
-        console.log(tickets);
-        window.location.href = 'editEvent.html';
+        window.location.href = 'changeEvent.html';
       }
     </script>
 

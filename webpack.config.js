@@ -10,7 +10,8 @@ module.exports = {
         bookEvent: './src/bookEvent.js',
         accountSummary: './src/accountSummary.js',
         viewEventAdmin: './src/viewEventAdmin.js', 
-        addEvents: './src/addEvents.js'
+        addEvents: './src/addEvents.js', 
+        updateEvents: './src/updateEvent.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist/bundle'),

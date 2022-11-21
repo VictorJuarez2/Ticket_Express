@@ -60,7 +60,7 @@ getDocs(eventsRef)
                                     `</div>`+
                                     `<div class="card bg-white" style="border:none;">`+
                     `<div class="card-body text-center">`+
-                    `<button type="button" class="btn bg-primary btn-lg text-white" onclick="click_on_row_button('${event.id}', ${cardCount})">Edit Event</button>`+ //value="${id}"
+                    `<button type="button" class="btn bg-primary btn-lg text-white" onclick="click_on_row_button('${event.id}')">Edit Event</button>`+ //value="${id}"
                     `</div>`+
                 `</div>`+
                                 `</div>`+

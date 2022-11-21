@@ -10,14 +10,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore()
 
+
+
 // Getting portions of the page
 const tab = document.getElementById("title")
-const body = document.getElementById("profile-page")
+const body = document.getElementById("event-page")
 const update_info = document.getElementById("update_form")
 const change_booking = document.querySelector(".Change")
 let flightCards = document.getElementById('flightCards');
 let PrevflightCards = document.getElementById('PrevflightCards');
-var uid;
 /*
 var today = new Date();
 let yyyy = today.getFullYear();
@@ -32,9 +33,9 @@ const d = new Date();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        uid = user.uid;
-        id = //whatever button we press
-        create_page_logged_in(id)
+        let id_int = JSON.parse(localStorage.getItem('id'));
+        console.log(id_int)
+        create_page_logged_in(id_int)
         // This is done within the auth State Change due to the fact that we need the uid whenever this is called
         const update_Profile_Form = document.getElementById("update_form")
         update_Profile_Form.addEventListener('submit', (event) => {
@@ -57,21 +58,17 @@ onAuthStateChanged(auth, (user) => {
 });
 
 //Page set Up
-function create_page_logged_in(userID) {
-    getDoc(doc(db, 'Account', userID)).then((snapshot) => {
-
-        tab.innerHTML = "Ticket Express - " + snapshot.data().userName + "'s Profile"
+function create_page_logged_in(id_int) {
+    getDoc(doc(db, 'event', id_int)).then((snapshot) => {
+        tab.innerHTML = "Ticket Express - " + snapshot.data().eventName + "'s Profile"
         body.innerHTML = `<div class="row justify-content-center" >
     <div class="col-xl-6 col-lg-7 col-md-12">
       <div class="card profile-header">
         <div class="body">
           <div class="row">
             <div class="col-lg-8 col-md-8 col-12">
-              <h4 class="m-t-0 m-b-0"><strong>${snapshot.data().Name}</strong></h4>
-              <h6> Balance: ${snapshot.data().Balance}</h6>
-              <div>
-                <button type = "submit" value = "submit" class="btn btn-primary btn-round edit_profile">Edit Profile</button>
-              </div>
+              <h4 class="m-t-0 m-b-0"><strong>${snapshot.data().eventName}</strong></h4>
+              <h6> Date: ${snapshot.data().eventDate}</h6>
             </div>
           </div>
         </div>
