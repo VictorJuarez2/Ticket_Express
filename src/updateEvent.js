@@ -34,13 +34,12 @@ const d = new Date();
 onAuthStateChanged(auth, (user) => {
     if (user) {
         let id_int = JSON.parse(localStorage.getItem('id'));
-        console.log(id_int)
         create_page_logged_in(id_int)
         // This is done within the auth State Change due to the fact that we need the uid whenever this is called
         const update_Profile_Form = document.getElementById("update_form")
         update_Profile_Form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            let ref = doc(db, 'event', );
+            event.preventDefault()
+            let ref = doc(db, 'event', id_int);
             if (update_Profile_Form.eventName.value) { updateDoc(ref, { eventName: update_Profile_Form.eventName.value }); }
             if (update_Profile_Form.eventLocation.value) { updateDoc(ref, { eventLocation: update_Profile_Form.eventLocation.value }) }
             if (update_Profile_Form.eventDate.value) { updateDoc(ref, { eventDate: update_Profile_Form.eventDate.value }) }
@@ -50,7 +49,7 @@ onAuthStateChanged(auth, (user) => {
             if (update_Profile_Form.eventCost.value) { updateDoc(ref, { price: parseInt(update_Profile_Form.eventCost.value) }) }
             if (update_Profile_Form.eventDesc.value) { updateDoc(ref, { eventDescription: parseInt(update_Profile_Form.eventDesc.value) }) }
             update_Profile_Form.reset()
-            create_page_logged_in(uid)
+            create_page_logged_in(id_int)
         })
     } else {
         create_page_logged_out();
@@ -69,6 +68,12 @@ function create_page_logged_in(id_int) {
             <div class="col-lg-8 col-md-8 col-12">
               <h4 class="m-t-0 m-b-0"><strong>${snapshot.data().eventName}</strong></h4>
               <h6> Date: ${snapshot.data().eventDate}</h6>
+              <h6> Location: ${snapshot.data().eventLocation}</h6>
+              <h6> Time: ${snapshot.data().eventTime}</h6>
+              <h6> Artist Preforming: ${snapshot.data().artistName}</h6>
+              <h6> Capacity: ${snapshot.data().eventCapacity}</h6>
+              <h6> Cost: ${snapshot.data().eventCost}</h6>
+              <h6> Description: ${snapshot.data().eventDescription}</h6>
             </div>
           </div>
         </div>
