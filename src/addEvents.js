@@ -26,7 +26,7 @@ onAuthStateChanged(auth, (user) => {
                 ['eventDescription']: addFlightForm.eventDesc.value,
                 ['eventLocation']: addFlightForm.eventLocation.value,
                 ['eventName']: addFlightForm.eventName.value,
-                ['evenTime']: addFlightForm.eventTime.value,
+                ['eventTime']: addFlightForm.eventTime.value,
                 ['maxCapacity']: addFlightForm.eventCapacity.value,
                 ['price']: addFlightForm.eventCost.value
             })

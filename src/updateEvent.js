@@ -46,8 +46,8 @@ onAuthStateChanged(auth, (user) => {
             if (update_Profile_Form.eventArtist.value) { updateDoc(ref, { artistName: update_Profile_Form.eventArtist.value }) }
             if (update_Profile_Form.eventTime.value) { updateDoc(ref, { eventTime: update_Profile_Form.eventTime.value }) }
             if (update_Profile_Form.eventCapacity.value) { updateDoc(ref, { maxCapacity: parseInt(update_Profile_Form.eventCapacity.value) }) }
-            if (update_Profile_Form.eventCost.value) { updateDoc(ref, { price: parseInt(update_Profile_Form.eventCost.value) }) }
-            if (update_Profile_Form.eventDesc.value) { updateDoc(ref, { eventDescription: parseInt(update_Profile_Form.eventDesc.value) }) }
+          if (update_Profile_Form.eventCost.value) { console.log(update_Profile_Form.eventCost.value),updateDoc(ref, { price: parseInt(update_Profile_Form.eventCost.value) }) }
+          if (update_Profile_Form.eventDesc.value) {updateDoc(ref, { eventDescription: update_Profile_Form.eventDesc.value }) }
             update_Profile_Form.reset()
             create_page_logged_in(id_int)
         })
@@ -71,8 +71,8 @@ function create_page_logged_in(id_int) {
               <h6> Location: ${snapshot.data().eventLocation}</h6>
               <h6> Time: ${snapshot.data().eventTime}</h6>
               <h6> Artist Preforming: ${snapshot.data().artistName}</h6>
-              <h6> Capacity: ${snapshot.data().eventCapacity}</h6>
-              <h6> Cost: ${snapshot.data().eventCost}</h6>
+              <h6> Capacity: ${snapshot.data().maxCapacity}</h6>
+              <h6> Cost: ${snapshot.data().price}</h6>
               <h6> Description: ${snapshot.data().eventDescription}</h6>
             </div>
           </div>
