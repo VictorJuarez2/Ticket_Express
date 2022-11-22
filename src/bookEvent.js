@@ -31,7 +31,13 @@ let currPrice = 0;              //Used to keep track of current price, this will
 
 //Grabbing fields for all buttons in page
 const purchaseButton = document.getElementById('purchase');
+var today = new Date();
+let yyyy = today.getFullYear();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+today = yyyy + '-' + mm + '-' + dd;
 
+console.log(today)
 
 
 //ON AUTH STATE CHANGE USED TO DETERMINE STATE OF THE PAGE
@@ -298,7 +304,7 @@ async function buyTicketUser(id){
         ticketType: "gen",
         eventID: id_int,
         cost: currPrice,
-        DateCreated: Timestamp.now()
+        DateCreated: today
       });
 
       updateDoc(docSnapUser.ref, {Tickets_Purchased: arrayUnion(docRef.id), Balance: docSnapUser.data().Balance - currPrice*ticket}); //Update user document
@@ -344,7 +350,7 @@ async function buyTicketNonUser(email, isMainUser){
             ticketType: "gen",
             eventID: id_int,
             cost: currPrice,
-            DateCreated: Timestamp.now()
+            DateCreated: today
         });
         updateDoc(user.ref, {Tickets_Purchased: arrayUnion(docRef.id)}); //Update user document
         updateDoc(docSnapEvent.ref, {['maxCapacity']: docSnapEvent.data()['maxCapacity'] - 1});  

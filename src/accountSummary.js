@@ -135,7 +135,7 @@ async function create_Ticket_Table(userId) {
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
                                     `<b>Artist</b><br><br>` +
-                                    `${event.data().eventArtist}` +
+                                    `${event.data()['artistName']}` +
                                     `</p>` +
                                     `</div>` +
                                     `</div>` +
@@ -183,7 +183,7 @@ async function create_Ticket_Table(userId) {
                                     `<div class="card-body text-center">` +
                                     `<p class="card-text">` +
                                     `<b>Artist</b><br><br>` +
-                                    `${event.data().eventArtist}` +
+                                    `${event.data()['artistName']}` +
                                     `</p>` +
                                     `</div>` +
                                     `</div>` +
