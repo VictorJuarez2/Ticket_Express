@@ -111,7 +111,7 @@ async function create_Ticket_Table(userId) {
                             if (strDate < d) {
                                 let card = `<div class="card">` +
                                     `<div class="card-body">` +
-                                    `Ticket Express - ${ticket.data()['ticketType']}` +
+                                    `Ticket Express - ${ticket.data()['ticketType']} Admission` +
                                     `<div class="card-group">` +
                                     `<div class="card bg-white" style="border:none;">` +
                                     `<div class="card-body text-center">` +
