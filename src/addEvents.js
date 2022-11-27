@@ -9,6 +9,12 @@ const auth = getAuth(app);
 const db = getFirestore();
 const eventsRef = collection(db, 'event');
 
+/************************************DISPLAY ADD EVENTS FORM*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: If we have a user it will allow for the input boxes to go and push data into our database.
+*  Output: There will be a change within out database and a success message.
+*/
 onAuthStateChanged(auth, (user) => {
     if (user) {
         //User is signed in 

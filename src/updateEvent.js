@@ -17,20 +17,15 @@ const tab = document.getElementById("title")
 const body = document.getElementById("event-page")
 const update_info = document.getElementById("update_form")
 const change_booking = document.querySelector(".Change")
-let flightCards = document.getElementById('flightCards');
-let PrevflightCards = document.getElementById('PrevflightCards');
-/*
-var today = new Date();
-let yyyy = today.getFullYear();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0');
-today = yyyy + '-' + mm + '-' + dd;
-const dob = document.getElementById("DOB")
-dob.max = today;*/
 
 const d = new Date();
 
+/************************************DISPLAY EVENT FORM + INFORMATION*************************************************************/
 
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: Assuming a user is logged in this will allow for the user to view an event and alter information of the event.
+*  Output: The change in UI specifically the create page however, there is no output.
+*/
 onAuthStateChanged(auth, (user) => {
     if (user) {
         let id_int = JSON.parse(localStorage.getItem('id'));
@@ -56,7 +51,12 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-//Page set Up
+/************************************DISPLAY EVENT INFORMATION*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: This is how we grab the information giving within the form and use it to alter our current information on the database.
+*  Output: This will change the database however, there is no output.
+*/
 function create_page_logged_in(id_int) {
     getDoc(doc(db, 'event', id_int)).then((snapshot) => {
         tab.innerHTML = "Ticket Express - " + snapshot.data().eventName + "'s Profile"
@@ -83,6 +83,12 @@ function create_page_logged_in(id_int) {
     })
 }
 
+/************************************Create PAGE FAIL*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: If no user is logged in this message will display
+*  Output: This will change the body's html
+*/
 function create_page_logged_out() {
     body.innerHTML = "Sign in or Create an account to view account summary"
 }

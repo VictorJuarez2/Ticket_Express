@@ -29,7 +29,12 @@ dob.max = today;*/
 
 const d = new Date();
 
+/************************************DISPLAY USER INFORMATION*************************************************************/
 
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: Depending on the state of the state of the user accessing this we will cleared the ticket table as well as their card for information
+*  Output: The change in UI from the ticket table being created to the account summary page.
+*/
 onAuthStateChanged(auth, (user) => {
     if (user) {
         uid = user.uid;
@@ -48,9 +53,6 @@ onAuthStateChanged(auth, (user) => {
                 let ref = doc(db, 'Account', uid);
                 if (update_Profile_Form.Name.value) { updateDoc(ref, { Name: update_Profile_Form.Name.value }); }
                 if (update_Profile_Form.Balance.value) { updateDoc(ref, { Balance: parseInt(update_Profile_Form.Balance.value) }) }
-                /*
-                if (update_Profile_Form.Phone_Number.value) { updateDoc(ref, { Phone_Number: update_Profile_Form.Phone_Number.value }) }
-                if (update_Profile_Form.Image.value) { updateDoc(ref, { image: update_Profile_Form.Image.value }) }*/
                 update_Profile_Form.reset()
                 update_Profile_launcher.hidden = false;
                 update_info.hidden = true;
@@ -62,7 +64,12 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-//Page set Up
+/************************************Login Page Information*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: Depending on if there is an input this will create a view that user can see given their name and balance.
+*  Output: HTML which is inserted into the body.
+*/
 function create_page_logged_in(userID) {
     getDoc(doc(db, 'Account', userID)).then((snapshot) => {
 
@@ -87,6 +94,12 @@ function create_page_logged_in(userID) {
     })
 }
 
+/************************************Login Page Information*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: This is if the user manages to access the page without being logged in.
+*  Output: The information of the page will display a message of signing in to view your tickets
+*/
 function create_page_logged_out() {
     body.innerHTML = "Sign in or Create an account to view account summary"
 }
@@ -94,6 +107,13 @@ function create_page_logged_out() {
 //Getting Flights collection
 const ticketsRef = collection(db, 'Ticket');
 
+
+/************************************Create Table Information*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: This creates the table of tickets which is broken up by 2 sections those after todays date and the ones prior.
+*  Output: HTML to populate the ticket table.
+*/
 async function create_Ticket_Table(userId) {
     (async () => {
         const mainRef = await doc(db, 'Account', userId);
@@ -217,7 +237,12 @@ async function create_Ticket_Table(userId) {
     })();
 }
 
-//Remove and Refund
+/************************************Remove and Refunds*************************************************************/
+
+/* Method Functionality: function called by #onAuthStateChange authentication
+*  Purpose: This is created in order to provide the ability to allow refunds to users when removing a ticket.
+*  Output: Change in display of html this is primarily done throught the backend
+*/
 flightCards.addEventListener('submit', remove_ticket)
 function remove_ticket(event) {
     event.preventDefault()
@@ -246,6 +271,12 @@ function remove_ticket(event) {
     })
 }
 
+/************************************Refund Information*************************************************************/
+
+/* Method Functionality: function called by #remove_ticket authentication
+*  Purpose: This is when a user chooses to refund a ticket.
+*  Output: This does not output anything rather changes items within the database.
+*/
 function issue_Refund(ticket) {
     (async () =>{
         getDoc(doc(db, 'Account', uid)).then((snapshot) => {
