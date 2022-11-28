@@ -28,6 +28,12 @@ onAuthStateChanged(auth, (user) => {
     }
 })
 
+/************************************DISPLAY EVENTS INFORMATION*************************************************************/
+
+/* Method Functionality: function is automatically run and allows for us to keep the card info.
+*  Purpose: This allows for us to generate each card and based on which we find necessary done in filter.
+*  Output: HTML which contains all cards as well as their count.
+*/
 let cardCount = 0
 getDocs(eventsRef)
     .then(events => {
@@ -73,7 +79,12 @@ getDocs(eventsRef)
 });
 
 
-//artist drop down
+/************************************Show Dropdown*************************************************************/
+
+/* Method Functionality: Function automatically ran by code to show dropdown
+*  Purpose: Display the possible options
+*  Output: This will change the HTML to display information based on available events there is no output.
+*/
 getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
@@ -88,7 +99,12 @@ getDocs(eventsRef)
         })
     });
 
-//location drop down
+/************************************Show Dropdown*************************************************************/
+
+/* Method Functionality: Function automatically ran by code to show dropdown
+*  Purpose: Display the possible options
+*  Output: This will change the HTML to display information based on available events there is no output.
+*/
 getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
@@ -103,7 +119,12 @@ getDocs(eventsRef)
         })
     });
 
-// View all Events
+/************************************View All Events*************************************************************/
+
+/* Method Functionality: Function ran which viewEvents listener is clicked.
+*  Purpose: Display all possible events.
+*  Output: This will change the HTML to display information based on available events there is no output.
+*/
 const viewEvent = document.getElementById('modal_view_right');
 const addEventInfo = document.getElementById('addEvent');
 viewEvent.addEventListener('click', (event)=>{
