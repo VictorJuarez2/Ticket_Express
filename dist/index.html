@@ -7,7 +7,7 @@
     <title>Ticket Express</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-dark">
     <header class="p-3" style="background-color: black;">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -33,29 +33,38 @@
           </div>
         </div>
       </header>
-
-      <div class="p-5 mb-4 bg-light rounded-3" style="text-align:center;margin:0 auto; background-image: url(../Images/concert_image.jpg);" >
-        <div class="container-fluid py-5">
-          <h1 class="display-5 fw-bold" style="color: rgb(197,175,100)">Let the Fun Begin!</h1>
-          <p class="col-md-8 fs-4", style="text-align:center;margin:0 auto;color:white">Thanks to Ticket Express you have all the shows you can find all in one place, All at the touch of a button!</p>
-          <button type="button" style="text-align:center;margin:0 auto;" class="btn btn-warning btn-lg my-2 logged-out"data-toggle="modal" data-target="#modalSignUp" >Sign-up</button>
-          <a href="viewEvents.html">
-            <button class="btn btn-lg my-2 my-sm-0 logged-in" style="text-align:center;margin:0 auto;background-color: lightgrey;" type="button" style="display: none;">View Events</button>
-          </a>
-          </div>
-      </div>
-
-      <div class="row align-items-md-stretch">
-        <div class="col-md-6">
-          <div class="h-100 p-5 text-bg-dark rounded-3">
-            <h2 style="text-align: center;">We Have What You Need!</h2>
-            <h3 style="text-align:center;margin:0 auto;">We have tickets available from all your favorite artists of all different genres! Such as Taylor Swift, Katy Perry, JID, Cuco and much more! </h2>
-          </div>
+      <div>
+        <div class="p-5 mb-4 bg-dark rounded-3" style="text-align:center;padding:0 auto; background-image: url(../Images/concert_image.jpg);" >
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold" style="color: rgb(197,175,100)">Let the Fun Begin!</h1>
+            <p class="col-md-8 fs-4", style="text-align:center;margin:0 auto;color:white">Thanks to Ticket Express you have all the shows you can find all in one place, All at the touch of a button!</p>
+            <button type="button" style="text-align:center;margin:0 auto;" class="btn btn-warning btn-lg my-2 logged-out"data-toggle="modal" data-target="#modalSignUp" >Sign-up</button>
+            <a href="viewEvents.html">
+              <button class="btn btn-lg my-2 my-sm-0 logged-in" style="text-align:center;margin:0 auto;background-color: lightgrey;" type="button" style="display: none;">View Events</button>
+            </a>
+            </div>
         </div>
-        <div class="col-md-6">
-          <div class="h-100 p-5 bg-light border rounded-3">
-            <h2 style="text-align: center;">The Best in the Business!</h2>
-            <h3 style="text-align: center;"> With transparent prices and no hidden fees we offer the lowest prices you'll find to see the people who make you happy!</h3>
+
+        <div class="row align-items-md-stretch bg-dark">
+          <div class="col-md-6" style="margin: auto;">
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <h2 style="text-align: center;">We Have What You Need!</h2>
+              <h3 style="text-align:center;margin:0 auto;">We have tickets available from all your favorite artists of all different genres! Such as Taylor Swift, Katy Perry, JID, Cuco and much more! </h2>
+            </div>
+          </div>
+          <div class="col-md-6" style="margin: auto;">
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <h2 style="text-align: center;">The Best in the Business!</h2>
+              <h3 style="text-align: center;"> With transparent prices and no hidden fees we offer the lowest prices you'll find to see the people who make you happy!</h3>
+            </div>
+          </div>
+          <div class="col-md-6" style="margin: auto;">
+            <br>
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <h2 style="text-align: center;">Special Holiday Offer!</h2>
+              <h3 style="text-align:center;margin:0 auto;">For a very limited time get 2 for 1 concert tickets now throught 12/10! </h2>
+            </div>
+            <br>
           </div>
         </div>
       </div>
@@ -121,23 +130,15 @@
   </div>
 </div>
 
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-          </a>
-          <span class="mb-3 mb-md-0 text-muted">© 2022 TicketExpress, Inc</span>
-        </div>
-    <!-- This is just a random comment -->
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-        </ul>
-      </footer>
-
-
-    
+      <!--Footer-->
+    <footer class="bg-dark text-center text-white" style="position: sticky">
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgb(33, 36, 41);">
+        © 2022 Copyright:
+        <a class="text-white" href="index.html">TicketExpress.com</a>
+        <p>Made by: Ashley Gilmore, Jose Vega, Gregorio Loi, Thomas Sosa, Victor Juarez, Guillermo Lopez, Miguel Contreras<br><b>CS 4374/5374</b></p>
+      </div>
+    </footer>   
 </body>
 <!--Scripts, 1) Our code 2) Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
