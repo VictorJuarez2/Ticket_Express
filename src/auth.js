@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import firebaseConfig from "./firebaseConfig";
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, getDisplayName } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 
@@ -24,7 +24,7 @@ const navBarUI = (user) => {
         user.getIdTokenResult()
             .then((idTokenResult) => {
                 // Confirm the user is an Admin.
-                console.log(idTokenResult.claims.admin == true)
+                console.log(idTokenResult.claims.admin)
                 if (idTokenResult.claims.role == "manager" || idTokenResult.claims.role == "admin") {
                     // Show admin UI.
                     admin.forEach(item => item.style.display = 'block');
@@ -87,7 +87,7 @@ loginForm.addEventListener('submit', (event) => {
     const pw = loginForm.floatingPassword.value //This grabs the password value div
     signInWithEmailAndPassword(auth, email, pw) //We then attempt to login the user
         .then((userCred) => { // If completed we hide the login form content
-            const user = userCred.user;// Here we hide the input boxes
+            //okay..
         })
         .catch((error) => {
             console.log(error) //If this does not work we send an error message to the console

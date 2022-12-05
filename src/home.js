@@ -1,27 +1,16 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
-    getFirestore, getDocs, collection, doc, QuerySnapshot, query, getDoc
+    getFirestore
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebaseConfig from "./firebaseConfig"
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
 
 const db = getFirestore();
-/*
-const flightsCitiesRef = collection(db, 'Airline Flights Cities');
-const flightsRef = collection(db, 'Airline Flights');
 
-
-const cards = document.getElementById('cards');
-const cardsForFlights = document.getElementById('cardsForFlights');
-const userUI = document.querySelectorAll('#nonManager');
-const managerUI = document.querySelectorAll('#manager');
-let servicedCities = [];
-*/
 //ON AUTH STATE CHANGE USED TO DETERMINE STATE OF THE PAGE
 const auth = getAuth();
 

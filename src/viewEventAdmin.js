@@ -1,7 +1,7 @@
 // imports
 import {initializeApp} from 'firebase/app';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import { getFirestore, collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 // Initialize firebase
@@ -89,7 +89,7 @@ getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
             let artist = document.getElementById("artistList");
-            var option1 = document.createElement("option");
+            let option1 = document.createElement("option");
 
             let artist_name = event.data()['artistName'];
 
@@ -109,7 +109,7 @@ getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
             let artist = document.getElementById("locationList");
-            var option1 = document.createElement("option");
+            let option1 = document.createElement("option");
 
             let artist_name = event.data()['eventLocation'];
 

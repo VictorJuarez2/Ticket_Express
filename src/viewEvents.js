@@ -1,6 +1,6 @@
 // imports
 import {initializeApp} from 'firebase/app';
-import { getFirestore, collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 // Initialize firebase
@@ -13,8 +13,6 @@ const buttonSorting = document.getElementById('buttons');
 
 //Initializing flight cards and global array to manipulate them
 const eventCards = document.getElementById('eventCards');
-let eventDataSorted = [];
-let eventDataOriginal = [];
 
 const eventsRef = collection(db, "event");
 
@@ -28,7 +26,6 @@ findEvent.addEventListener('submit', event=>{
     let cardCount = 0;
     event.preventDefault();
     eventCards.innerHTML = '';
-    eventDataOriginal = [];
     buttonSorting.style.display = 'none';
 
     let eventArtist = findEvent.artist.value;
@@ -41,9 +38,9 @@ findEvent.addEventListener('submit', event=>{
         .then(events => {
             events.forEach(event =>{
                 const eventData = event.data()                
-                var allEmpty = (eventArtist == "" && eventLocation == "" && priceRange == "");
+                let allEmpty = (eventArtist == "" && eventLocation == "" && priceRange == "");
                 
-                if(!(priceRange == "")){
+                if(priceRange != ""){
                     priceInRange = isPriceInRange(priceRange, eventData['price']);
                 }
                 if(priceInRange && !allEmpty && 
@@ -118,7 +115,7 @@ getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
             let artist = document.getElementById("artistList");
-            var option1 = document.createElement("option");
+            let option1 = document.createElement("option");
 
             let artist_name = event.data()['artistName'];
 
@@ -138,7 +135,7 @@ getDocs(eventsRef)
     .then((events)=>{
         events.docs.forEach(event =>{
             let artist = document.getElementById("locationList");
-            var option1 = document.createElement("option");
+            let option1 = document.createElement("option");
 
             let artist_name = event.data()['eventLocation'];
 

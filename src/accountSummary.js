@@ -2,7 +2,7 @@ import firebaseConfig from './firebaseConfig'
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {
-    getFirestore, collection, getDocs, getDoc, deleteDoc, doc, updateDoc, FieldValue, onSnapshotsInSync
+    getFirestore, collection, getDocs, getDoc, deleteDoc, doc, updateDoc
 } from 'firebase/firestore';
 
 // Initializing firebase
@@ -17,15 +17,7 @@ const update_info = document.getElementById("update_form")
 const change_booking = document.querySelector(".Change")
 let flightCards = document.getElementById('flightCards');
 let PrevflightCards = document.getElementById('PrevflightCards');
-var uid;
-/*
-var today = new Date();
-let yyyy = today.getFullYear();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0');
-today = yyyy + '-' + mm + '-' + dd;
-const dob = document.getElementById("DOB")
-dob.max = today;*/
+let uid;
 
 const d = new Date();
 
@@ -257,8 +249,8 @@ function remove_ticket(event) {
         deleteDoc(doc(db, 'Ticket', event.submitter.value))
 
         getDoc(doc(db, 'Account', uid)).then((user_snapshot) => {
-            var user_tickets = user_snapshot.data().Tickets_Purchased
-            for (var i = 0; i < user_tickets.length; i++) {
+            let user_tickets = user_snapshot.data().Tickets_Purchased
+            for (let i = 0; i < user_tickets.length; i++) {
                 if (user_tickets[i] == event.submitter.value) {
                     user_tickets.splice(i, 1)
                 }

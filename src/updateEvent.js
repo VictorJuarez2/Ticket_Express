@@ -2,7 +2,7 @@ import firebaseConfig from './firebaseConfig'
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {
-    getFirestore, collection, getDocs, getDoc, deleteDoc, doc, updateDoc, FieldValue, onSnapshotsInSync
+    getFirestore, getDoc, doc, updateDoc
 } from 'firebase/firestore';
 
 // Initializing firebase
@@ -41,8 +41,11 @@ onAuthStateChanged(auth, (user) => {
             if (update_Profile_Form.eventArtist.value) { updateDoc(ref, { artistName: update_Profile_Form.eventArtist.value }) }
             if (update_Profile_Form.eventTime.value) { updateDoc(ref, { eventTime: update_Profile_Form.eventTime.value }) }
             if (update_Profile_Form.eventCapacity.value) { updateDoc(ref, { maxCapacity: parseInt(update_Profile_Form.eventCapacity.value) }) }
-          if (update_Profile_Form.eventCost.value) { console.log(update_Profile_Form.eventCost.value),updateDoc(ref, { price: parseInt(update_Profile_Form.eventCost.value) }) }
-          if (update_Profile_Form.eventDesc.value) {updateDoc(ref, { eventDescription: update_Profile_Form.eventDesc.value }) }
+            if (update_Profile_Form.eventCost.value) {
+              console.log(update_Profile_Form.eventCost.value)
+              updateDoc(ref, { price: parseInt(update_Profile_Form.eventCost.value) })
+            }
+            if (update_Profile_Form.eventDesc.value) {updateDoc(ref, { eventDescription: update_Profile_Form.eventDesc.value }) }
             update_Profile_Form.reset()
             create_page_logged_in(id_int)
         })

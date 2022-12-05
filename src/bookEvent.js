@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, getDocs, collection, connectFirestoreEmulator, getDoc, doc,updateDoc, arrayUnion, Timestamp, addDoc} from "firebase/firestore";
+import { getFirestore, getDocs, collection, getDoc, doc,updateDoc, arrayUnion, addDoc} from "firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -31,7 +31,7 @@ let currPrice = 0;              //Used to keep track of current price, this will
 
 //Grabbing fields for all buttons in page
 const purchaseButton = document.getElementById('purchase');
-var today = new Date();
+let today = new Date();
 let yyyy = today.getFullYear();
 let dd = String(today.getDate()).padStart(2, '0');
 let mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -110,17 +110,17 @@ async function showUserNames(id){
     const docSnap = await getDoc(userDoc);
 
     if(ticket != ""){
-      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, 123, docSnap.data());
+      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, 123);
       for(let i = 0; i < parseInt(ticket)-1; i++){
         userCards.innerHTML += getCardNotUser(i+1);
       }
     }else{
-      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, 123, docSnap.data());
+      userCards.innerHTML += getCardUser(docSnap.data().Name, docSnap.data().Email, 123);
     }
 
   }else{ //Gives error if no integer number is inputed
     userCards.innerHTML = ""
-    userCards.innerHTML += getCardError();
+    getCardError();
   }
 }
 
@@ -224,9 +224,7 @@ async function getCartInfo(flightClass){
   const eventDoc = doc(db, 'event', id_int);
   const docSnap = await getDoc(eventDoc);
   let price = 0;
-  let promoChange = "";
   cart.innerHTML = "";
-  let promoState = "";
 
   if(ticket == ""){
     ticket = "1";
@@ -296,7 +294,8 @@ async function buyTicketUser(id){
 
   const eventDoc = doc(db, 'event', id_int); //events
   const docSnapEvent = await getDoc(eventDoc);
-  
+
+  let top = document.getElementById("top");
   if(docSnapUser.data().Balance > currPrice){
     //Create new ticket document
     (async() => {
@@ -313,15 +312,13 @@ async function buyTicketUser(id){
       })();
       displaySuccess();
       purchaseButton.reset();
-      var top = document.getElementById("top");
       top.scrollIntoView();
-      let timer = setTimeout(function () {
+      setTimeout(function () {
         window.location.href = 'viewEvents.html'
       }, 5000);
   }else{
     displayFundingError()
     purchaseButton.reset();
-    var top = document.getElementById("top");
     top.scrollIntoView();
   }
   
@@ -335,7 +332,7 @@ async function buyTicketNonUser(email, isMainUser){
   const userDoc = doc(db, 'event', id_int);
   const docSnapEvent = await getDoc(userDoc);
 
-  var mainUserFound = false;
+  let mainUserFound = false;
 
   getDocs(usersRef)
   .then((snapshot)=>{
@@ -362,7 +359,7 @@ async function buyTicketNonUser(email, isMainUser){
   if(!mainUserFound){
     displaySuccess();
     purchaseButton.reset();
-    var top = document.getElementById("top");
+    let top = document.getElementById("top");
     top.scrollIntoView();
   }
 }
